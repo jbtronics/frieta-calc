@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <script src="./js/controller.js" type="module"> </script>
+</head>
+<body>
+
+<div class="container">
+    <div data-controller="frieta">
+        <div class="row">
+            <div class="col">
+                <h1 style="font-size: 50px;" data-frieta-target="result">Frieta</h1>
+            </div>
+            <div class="col">
+                <button class="btn btn-secondary" data-action="frieta#reset"->Reset</button>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="d-grid gap-2 mx-auto">
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="350">Bier, Radler (3,50 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="400">Desperados (4,00 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="550">Gin Tonic, Cuba Libre (5,50 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="100">Kirsch, Pfeffi, Wasser (1,00 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="200">Wodka, Rum, Gin (2,00 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="300">Red Bull, Club Mate (3,00 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="250">Softdrinks (2,50 €)</button>
+                <button class="btn btn-primary btn-lg" type="button" data-frieta-target="button" data-value="-100">Becher Rückgabe (- 1,00 €)</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
