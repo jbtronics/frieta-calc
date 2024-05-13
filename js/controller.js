@@ -19,7 +19,7 @@ Stimulus.register("frieta", class extends Controller {
     }
 
     updateResult() {
-        this.resultTarget.textContent = this.sum / 100 + " €";
+        this.resultTarget.value = this.sum / 100 + " €";
     }
 
     reset() {

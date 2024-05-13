@@ -26,151 +26,148 @@
         }
     </style>
 </head>
-<body>
+<body data-controller="frieta" style="padding-top: 75px;">
+
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" disabled data-frieta-target="result" value="Frieta Bar">
+            <button class="btn btn-outline-secondary" type="button" data-action="frieta#reset">Reset</button>
+        </div>
+    </div>
+</nav>
 
 <div class="container">
-    <div data-controller="frieta">
-        <div class="row">
-            <div class="col">
-                <h1 style="font-size: 50px;" data-frieta-target="result">Bars</h1>
+    <div class="row">
+        <div class="d-grid gap-2 mx-auto">
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="-100">
+                    Becher Rückgabe<br>
+                    <small>- 1,00 €</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
             </div>
-            <div class="col">
-                <button class="btn btn-secondary" data-action="frieta#reset"->Reset</button>
+
+            <h5 class="m-0">Bier</h5>
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="450">
+                    Bier, Radler<br>
+                    <small>3,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
             </div>
-        </div>
 
-
-        <div class="row">
-            <div class="d-grid gap-2 mx-auto">
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="-100">
-                        Becher Rückgabe<br>
-                        <small>- 1,00 €</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="500">
+                    Salitos<br>
+                    <small>4,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
                             0
                         </span>
-                    </button>
-                </div>
-
-                <h5 class="m-0">Bier</h5>
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="450">
-                        Bier, Radler<br>
-                        <small>3,50 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="500">
-                        Salitos<br>
-                        <small>4,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <hr class="m-0">
-
-                <h5 class="m-0">0,0 %</h5>
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="350">
-                        Cola, Fanta, Sprite, Orangensaft, Tonic<br>
-                        <small>2,50 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="400">
-                        Club Mate<br>
-                        <small>3,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="200">
-                        Wasser<br>
-                        <small>1,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <hr class="m-0">
-
-                <h5 class="m-0">Longdrinks</h5>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="650">
-                        Gin Tonic, Cuba Libre, Lillet, Wodka Bull, Flying Hirsch, Wodka-Mate, Fireball Redbull<br>
-                        <small>5,50 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="600">
-                        Wodka O-Saft, Wodka Cola, Fireball Cola<br>
-                        <small>5,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <hr class="m-0">
-
-                <h5 class="m-0">Cocktail</h5>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="700">
-                        Tequila Sunrise<br>
-                        <small>6,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <hr class="m-0">
-
-                <h5 class="m-0">Energy</h5>
-
-                <div class="btn-group btn-group-lg" role="group">
-                    <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
-                    <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="400">
-                        Red Bull<br>
-                        <small>3,00 € (+ 1 €)</small>
-                        <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                </div>
-
-                <hr class="m-0">
-
+                </button>
             </div>
+
+            <hr class="m-0">
+
+            <h5 class="m-0">0,0 %</h5>
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="350">
+                    Cola, Fanta, Sprite, Orangensaft, Tonic<br>
+                    <small>2,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="400">
+                    Club Mate<br>
+                    <small>3,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="200">
+                    Wasser<br>
+                    <small>1,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <hr class="m-0">
+
+            <h5 class="m-0">Longdrinks</h5>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="650">
+                    Gin Tonic, Cuba Libre, Lillet, Wodka Bull, Flying Hirsch, Wodka-Mate, Fireball Redbull<br>
+                    <small>5,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="600">
+                    Wodka O-Saft, Wodka Cola, Fireball Cola<br>
+                    <small>5,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <hr class="m-0">
+
+            <h5 class="m-0">Cocktail</h5>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="700">
+                    Tequila Sunrise<br>
+                    <small>6,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <hr class="m-0">
+
+            <h5 class="m-0">Energy</h5>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="400">
+                    Red Bull<br>
+                    <small>3,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-success" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <hr class="m-0">
+
         </div>
     </div>
 </div>
