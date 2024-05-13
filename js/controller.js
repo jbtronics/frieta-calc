@@ -36,6 +36,16 @@ Stimulus.register("frieta", class extends Controller {
         });
     }
 
+    _resetTimeout() {
+        if (this.timeout) {
+            clearTimeout(this.timeout);
+        }
+        this.timeout = setTimeout(() => {
+            this.reset();
+            this.timeout = null;
+        }, TIMEOUT);
+    }
+
     _btnClick(event) {
         //If no value is set, do nothing
         if (!event.target.dataset.value) {
@@ -55,12 +65,46 @@ Stimulus.register("frieta", class extends Controller {
         }
 
         //Clear the existing timeout and set a new one
-        if (this.timeout) {
-            clearTimeout(this.timeout);
+        this._resetTimeout();
+    }
+
+    decrement(event) {
+        //Find sibling button with the data-value attribute
+        const decrementBtn = event.target.closest("button");
+
+        const neighbor = decrementBtn.nextElementSibling;
+        let value = neighbor.dataset.value;
+
+        //If the value is not set, do nothing
+        if (!value) {
+            return;
         }
-        this.timeout = setTimeout(() => {
-            this.reset();
-            this.timeout = null;
-        }, TIMEOUT);
+
+        //Find the badge inside the button and update its value
+        let badge = neighbor.querySelector(".badge");
+        if (badge) {
+
+            let currentValue = parseInt(badge.textContent);
+
+            //If the value is already 0, do nothing besides resetting the timeout
+            if (currentValue === 0) {
+                this._resetTimeout();
+                return;
+            }
+
+            badge.textContent = currentValue - 1;
+
+            //If the value is 0, hide the badge
+            if (badge.textContent === "0") {
+                badge.style.display = "none";
+            }
+        }
+
+        //Decrement the sum
+        this.sum -= parseInt(value);
+        this.updateResult();
+
+        //Clear the existing timeout and set a new one
+        this._resetTimeout();
     }
 })
