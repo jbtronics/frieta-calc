@@ -20,6 +20,23 @@
         }
     </script>
 
+    <script>
+        acquireWakeLock = function() {
+            //If wakelock is supported by the browser
+            if ('wakeLock' in navigator) {
+                //Request a wakelock
+                navigator.wakeLock.request('screen').then(function(wakeLock) {
+                    console.log('Screen wake lock is active');
+                }).catch(function(err) {
+                    console.error('The wake lock request failed:', err);
+                });
+            }
+        }
+
+        //Acquire a wakelock to ensure the screen stays on
+        acquireWakeLock();
+    </script>
+
     <style>
         .frieta-badge {
             font-size: 20px;
