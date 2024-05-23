@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="de" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frieta Sektbar</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./icons/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="./css/sweetalert2.min.css">
+    <script src="./js/controller.js" type="module"> </script>
+
+    <script>
+        toggleFullScreen = function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(console.error);
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
+
+    <script>
+        acquireWakeLock = function() {
+            //If wakelock is supported by the browser
+            if ('wakeLock' in navigator) {
+                //Request a wakelock
+                navigator.wakeLock.request('screen').then(function(wakeLock) {
+                    console.log('Screen wake lock is active');
+                }).catch(function(err) {
+                    console.error('The wake lock request failed:', err);
+                });
+            }
+        }
+
+        //Acquire a wakelock to ensure the screen stays on
+        acquireWakeLock();
+    </script>
+
+    <style>
+        .frieta-badge {
+            font-size: 20px;
+        }
+
+        .frieta-btn {
+            line-height: 1.0;
+        }
+
+        .frieta-btn small {
+            font-size: small;
+        }
+
+        .btn-minus {
+            max-width: 50px;
+        }
+    </style>
+</head>
+<body data-controller="frieta" style="padding-top: 75px;">
+
+<nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container">
+        <div class="input-group input-group-lg">
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+            </button>
+            <input type="text" class="form-control" disabled data-frieta-target="result" value="Frieta Sektbar" style="font-weight: bold;">
+            <button class="btn btn-outline-secondary" type="button" data-action="frieta#calculateChange" alt="Wechselgeld berechnen">
+                <i class="bi bi-currency-exchange"></i>
+            </button>
+            <button class="btn btn-outline-secondary" type="button" data-action="frieta#reset">Reset</button>
+
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="toggleFullScreen();">Vollbild</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="overflow: auto;"> <!-- The overflow is needed to make the navbar truely fixed when scrollin with visible badges -->
+    <div class="row">
+        <div class="d-grid gap-2 mx-auto">
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-secondary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-secondary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="-100">
+                    Becher Rückgabe<br>
+                    <small>- 1 €</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <h5 class="m-0">Wein & Sekt</h5>
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-success btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-success btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="450">
+                    Weißwein Schorle<br>
+                    <small>3,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-success btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-success btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="500">
+                    Weißwein<br>
+                    <small>4,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-success btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-success btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="550">
+                    Sekt im Piccolo<br>
+                    <small>4,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-success btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-success btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="650">
+                    Lillet Berry<br>
+                    <small>5,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <hr class="m-0">
+
+            <h5 class="m-0">Specials</h5>
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-info btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-info btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="650">
+                    Gin Melon & Wodka Bull<br>
+                    <small>5,50 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-info btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-info btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="700">
+                    Flying Secco<br>
+                    <small>6,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+
+
+            <hr class="m-0">
+
+            <h5 class="m-0">Energy</h5>
+            <div class="btn-group btn-group-lg" role="group">
+                <button class="btn btn-outline-primary btn-minus" data-action="frieta#decrement"><i class="bi bi-dash-square-fill"></i></button>
+                <button class="btn btn-primary btn-lg position-relative frieta-btn" type="button" data-frieta-target="button" data-value="400">
+                    RedBull<br>
+                    <small>3,00 € (+ 1 €)</small>
+                    <span class="position-absolute top-50 start-100 translate-middle badge frieta-badge rounded-pill bg-secondary" style="display: none;">
+                            0
+                        </span>
+                </button>
+            </div>
+            
+            <hr class="m-0">
+        </div>
+    </div>
+</div>
+
+
+<script src="./js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
