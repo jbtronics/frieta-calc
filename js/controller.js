@@ -1,4 +1,6 @@
 import { Application, Controller } from "./stimulus.js"
+import "./sweetalert2.all.min.js";
+window.Swal = Sweetalert2;
 window.Stimulus = Application.start()
 
 const TIMEOUT = 30000; //30 seconds
@@ -68,43 +70,63 @@ Stimulus.register("frieta", class extends Controller {
         this._resetTimeout();
     }
 
-    calculateChange()
-    {
+    async calculateChange() {
         if (this.sum === 0) {
-            alert("Keine Bestellung aufgegeben");
+            Swal.fire({
+                icon: "error",
+                title: "Keine Bestellung aufgegeben"
+            });
             return;
         }
 
         if (this.sum < 0) {
-            alert("Betrag negativ. Geld an Kunden geben!");
+            Swal.fire({
+                icon: "error",
+                title: "Betrag negativ. Geld an Kunden geben!"
+            });
             return;
         }
 
         //Ask for the amount of money given
-        let given = prompt("Geld gegeben?");
-        if (!given) {
+        //let given = prompt("Geld gegeben?");
+        let result = await Swal.fire({
+            title: "Geld von Kunde?",
+            input: "number",
+            inputAttributes: {
+                min: this.sum / 100,
+                step: "0.01"
+            }
+        });
+        if (!result.isConfirmed) {
             return;
         }
 
         //Calculate the change
-        //Replace the comma with a dot to allow for both comma and dot as decimal separator
-        given = given.replace(",", ".");
-        given = Number(given);
+        let given = Number(result.value);
 
         this._resetTimeout();
 
         if (isNaN(given)) {
-            alert("Ungültige Eingabe");
+            Swal.fire({
+                icon: "error",
+                title: "Ungültige Eingabe"
+            });
             return;
         }
 
         if (given < this.sum / 100) {
-            alert("Zu wenig Geld gegeben");
+            Swal.fire({
+                icon: "error",
+                title: "Zu wenig Geld gegeben"
+            });
             return;
         }
 
         let change = Number(given) - this.sum / 100;
-        alert("Rückgeld: " + change.toFixed(2) + " €");
+        Swal.fire({
+            icon: "success",
+            title: "Rückgeld: " + change.toFixed(2) + " €"
+        });
     }
 
     decrement(event) {
