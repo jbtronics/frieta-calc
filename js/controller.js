@@ -1,7 +1,7 @@
 import { Application, Controller } from "./stimulus.js"
 window.Stimulus = Application.start()
 
-const TIMEOUT = 5000; //10 seconds
+const TIMEOUT = 30000; //30 seconds
 
 Stimulus.register("frieta", class extends Controller {
     static targets = [ "result", "button" ]
