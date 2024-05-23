@@ -68,6 +68,40 @@ Stimulus.register("frieta", class extends Controller {
         this._resetTimeout();
     }
 
+    calculateChange()
+    {
+        if (this.sum === 0) {
+            alert("Keine Bestellung aufgegeben");
+            return;
+        }
+
+        //Ask for the amount of money given
+        let given = prompt("Geld gegeben?");
+        if (!given) {
+            return;
+        }
+
+        //Calculate the change
+        //Replace the comma with a dot to allow for both comma and dot as decimal separator
+        given = given.replace(",", ".");
+        given = Number(given);
+
+        this._resetTimeout();
+
+        if (isNaN(given)) {
+            alert("Ungültige Eingabe");
+            return;
+        }
+
+        if (given < this.sum / 100) {
+            alert("Zu wenig Geld gegeben");
+            return;
+        }
+
+        let change = Number(given) - this.sum / 100;
+        alert("Rückgeld: " + change.toFixed(2) + " €");
+    }
+
     decrement(event) {
         //Find sibling button with the data-value attribute
         const decrementBtn = event.target.closest("button");
