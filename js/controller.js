@@ -75,6 +75,11 @@ Stimulus.register("frieta", class extends Controller {
             return;
         }
 
+        if (this.sum < 0) {
+            alert("Betrag negativ. Geld an Kunden geben!");
+            return;
+        }
+
         //Ask for the amount of money given
         let given = prompt("Geld gegeben?");
         if (!given) {
